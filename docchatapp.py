@@ -36,9 +36,9 @@ def get_llm_with_free_802key_1():
     temperature=0
   )
 #Title for the StreamLit Page
-st.title('Chat about the constitution')
+st.title('Auto Order')
 # Loading documents (Make sure constitution.pdf is available in the  directory)
-loader = PyPDFLoader("constitution.pdf")
+loader = PyPDFLoader("The-Grill-Dinner.pdf")
 documents = loader.load()
 # print(documents) # print to ensure document loaded correctly.
 
@@ -48,9 +48,9 @@ chunks = text_splitter.split_documents(documents)
 # to see the chunks
 # st.write(chunks[0])
 # st.write(chunks[1])
-print("OpenAIEmbeddings initializing.")
+
 embeddings = OpenAIEmbeddings(api_key=os.environ['OPENAI_API_KEY'])
-print("OpenAIEmbeddings initialized successfully.")
+
 vector_store = FAISS.from_documents(chunks, embeddings)
 # initialize OpenAI instance and set up a chain for Q&A from an LLM
 #llm=get_llm(temperature=0.7, model="gpt-3.5-turbo")
@@ -61,9 +61,16 @@ retriever=vector_store.as_retriever()
 chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
 
 
-# get question from user input using streamlit interface
-#Example question: "What are the three branches of government?"
-question = st.text_input('Input your question:')
+
+# Input fields for user to enter details
+question_1 = st.text_input('How many people are dining? Reply in numbers')
+question_2 = st.text_input('What is the meal budget? Reply in High/Medium/Low')
+
+question = None
+# Generating the question string
+if question_1 and question_2:  # Ensure inputs are provided
+    question = f'Help order food for {question_1} people under a {question_2} budget.'
+
 if question:
   # run chain
   result = chain.invoke(question)
