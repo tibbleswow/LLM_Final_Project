@@ -31,7 +31,7 @@ def get_llm_with_free_802key_1():
   api_key_from_kyle_and_sudhir = os.environ['OPENAI_API_KEY']
   return ChatOpenAI(
     api_key=api_key_from_kyle_and_sudhir,
-    base_url="https://api.802.mba/api/providers/openai/v1/",
+    #base_url="https://api.802.mba/api/providers/openai/v1/",
     model_name="gpt-4o-mini",
     temperature=0
   )
@@ -48,7 +48,9 @@ chunks = text_splitter.split_documents(documents)
 # to see the chunks
 # st.write(chunks[0])
 # st.write(chunks[1])
+print("OpenAIEmbeddings initializing.")
 embeddings = OpenAIEmbeddings(api_key=os.environ['OPENAI_API_KEY'])
+print("OpenAIEmbeddings initialized successfully.")
 vector_store = FAISS.from_documents(chunks, embeddings)
 # initialize OpenAI instance and set up a chain for Q&A from an LLM
 #llm=get_llm(temperature=0.7, model="gpt-3.5-turbo")
