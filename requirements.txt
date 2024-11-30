@@ -1,2 +1,11 @@
-streamlit==1.25.0
-
+streamlit
+openai
+langchain
+langchain-openai
+langchain-community
+PyPDF2
+faiss-cpu
+chromadb
+tiktoken
+requests
+beautifulsoup4
