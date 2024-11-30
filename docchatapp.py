@@ -1,78 +1,105 @@
 import os
-import streamlit as st                        # used to create our UI frontend
+import streamlit as st
+import requests
+from io import BytesIO
+from PyPDF2 import PdfReader
+from bs4 import BeautifulSoup
 
-#Libraries for Document Loaders
-#from langchain.document_loaders import PyPDFLoader
-from langchain_community.document_loaders import PyPDFLoader # import loaders
-from langchain_openai import ChatOpenAI
-
-#Libraries for Document Splitting, embeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
-
-#Libraries for VectorStores
-from langchain.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.vectorstores import FAISS
-
-#Chain for Q&A after retrieving external documents
 from langchain.chains import RetrievalQA
+from langchain.schema import Document
+from langchain.document_loaders import WebBaseLoader
+from langchain.document_loaders import PyPDFLoader
 
-def get_llm(temperature, model):
-  my_openaikey=os.environ['OPENAI_API_KEY']
-  return ChatOpenAI(
-    api_key=my_openaikey,
-    model_name=model,
-    temperature=temperature
-  )
 
-#A new llm function that will work with the free key provided to you
-from langchain_openai import ChatOpenAI
+# Function to initialize LLM
 def get_llm_with_free_802key_1():
-  api_key_from_kyle_and_sudhir = os.environ['OPENAI_API_KEY']
-  return ChatOpenAI(
-    api_key=api_key_from_kyle_and_sudhir,
-    #base_url="https://api.802.mba/api/providers/openai/v1/",
-    model_name="gpt-4o-mini",
-    temperature=0
-  )
-#Title for the StreamLit Page
-st.title('Auto Order')
-# Loading documents (Make sure constitution.pdf is available in the  directory)
-loader = PyPDFLoader("The-Grill-Dinner.pdf")
-documents = loader.load()
-# print(documents) # print to ensure document loaded correctly.
+    api_key = os.environ['OPENAI_API_KEY']
+    return ChatOpenAI(api_key=api_key, model_name="gpt-4o-mini", temperature=0)
 
-#Splitting Documents into Chunks for embeddings and the store them in vector stores
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-chunks = text_splitter.split_documents(documents)
-# to see the chunks
-# st.write(chunks[0])
-# st.write(chunks[1])
+# Streamlit UI
+st.title('Auto Order System')
 
-embeddings = OpenAIEmbeddings(api_key=os.environ['OPENAI_API_KEY'])
-
-vector_store = FAISS.from_documents(chunks, embeddings)
-# initialize OpenAI instance and set up a chain for Q&A from an LLM
-#llm=get_llm(temperature=0.7, model="gpt-3.5-turbo")
-#llm = ChatOpenAI(model='gpt-3.5-turbo', temperature=0)
-llm = get_llm_with_free_802key_1()
-
-retriever=vector_store.as_retriever()
-chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
+# Input: URL
+url = st.text_input("Enter the URL of the menu:")
 
 
+# Input: Number of diners and budget
+question_1 = st.text_input("How many people are dining? Reply in numbers")
+question_2 = st.text_input("What is the meal budget? Reply in High/Medium/Low")
 
-# Input fields for user to enter details
-question_1 = st.text_input('How many people are dining? Reply in numbers')
-question_2 = st.text_input('What is the meal budget? Reply in High/Medium/Low')
+# Process documents and answer questions
+if question_1 and question_2 and url:
+    try:
 
-question = None
-# Generating the question string
-if question_1 and question_2:  # Ensure inputs are provided
-    question = f'Help order food for {question_1} people under a {question_2} budget.'
+        if url:
+            try:
+                if url.lower().endswith(".pdf"):
+                    
+                    response = requests.get(url)
+                    pdf_filename = "new_menu.pdf"
+                    if response.status_code == 200:
+                        with open(pdf_filename, 'wb') as f:
+                            f.write(response.content)
+                        st.info("PDF processed successfully")
+                    else:
+                        st.info("Failed to download PDF. Status code: {response.status_code}")
+                        loader = None
+                    loader = PyPDFLoader(pdf_filename)
+                else:
+                    st.info("Scraping webpage...")
+                    loader = WebBaseLoader(url)
+                
+                if loader:  # Ensure loader is defined
+                    documents = loader.load()
+                    if not documents:
+                        st.error("No documents were loaded. Please check the URL or PDF content.")
+                    else:
+                        st.success(f"Loaded {len(documents)} documents successfully!")
+                        # Debugging: Print the content of the first document
+                        #st.write("First Document Content:", documents[0].page_content if documents else "No content found.")
+                        #for i, doc in enumerate(documents):
+                        #    st.write(f"Document {i + 1} Content:", doc.page_content)
+                else:
+                    st.error("Loader could not be initialized.")
+            except Exception as e:
+                st.error(f"Failed to process the URL: {e}")
+        documents = loader.load()
+        # Convert documents to LangChain format
+        # documents = [Document(page_content=doc["content"], metadata={}) for doc in documents]
 
-if question:
-  # run chain
-  result = chain.invoke(question)
-  response = result['result']
-  st.write(response)
+        # Split documents into chunks
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+        chunks = text_splitter.split_documents(documents)
+
+        #if chunks:
+        #    if len(chunks) > 0:
+        #        st.write(chunks[0])
+        #    if len(chunks) > 1:
+        #        st.write(chunks[1])
+        #else:
+        #    st.error("No content could be split into chunks. Please check the input document.")
+        
+        # Create embeddings and vector store
+        embeddings = OpenAIEmbeddings(api_key=os.environ['OPENAI_API_KEY'])
+        vector_store = FAISS.from_documents(chunks, embeddings)
+        retriever = vector_store.as_retriever()
+
+        # Initialize LLM and chain
+        llm = get_llm_with_free_802key_1()
+        chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
+
+        # Construct query
+        query = f"Help order food for {question_1} people under a {question_2} budget."
+        st.write(query)
+        # Get response
+        result = chain.invoke(query)
+        response = result['result']
+        st.write(response)
+    except Exception as e:
+        st.error(f"Error generating response: {e}")
+else:
+    if url and (not question_1 or not question_2):
+        st.info("Please provide both the number of people and the budget.")

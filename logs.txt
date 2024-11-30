@@ -4,20 +4,11 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to fals
 
   You can now view your Streamlit app in your browser.
 
-  Local URL: http://localhost:8509
-  Network URL: http://10.0.2.110:8509
-  External URL: http://20.42.11.23:8509
+  Local URL: http://localhost:8502
+  Network URL: http://10.0.3.10:8502
+  External URL: http://172.191.151.55:8502
 
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
@@ -26,16 +17,7 @@ with new imports of:
 >> from langchain_community.vectorstores import FAISS
 You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
   from langchain.vectorstores import FAISS
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
@@ -44,16 +26,7 @@ with new imports of:
 >> from langchain_community.vectorstores import FAISS
 You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
   from langchain.vectorstores import FAISS
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
@@ -62,16 +35,7 @@ with new imports of:
 >> from langchain_community.vectorstores import FAISS
 You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
   from langchain.vectorstores import FAISS
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
@@ -80,16 +44,7 @@ with new imports of:
 >> from langchain_community.vectorstores import FAISS
 You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
   from langchain.vectorstores import FAISS
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
@@ -98,16 +53,7 @@ with new imports of:
 >> from langchain_community.vectorstores import FAISS
 You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
   from langchain.vectorstores import FAISS
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
@@ -116,16 +62,7 @@ with new imports of:
 >> from langchain_community.vectorstores import FAISS
 You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
   from langchain.vectorstores import FAISS
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
@@ -134,16 +71,7 @@ with new imports of:
 >> from langchain_community.vectorstores import FAISS
 You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
   from langchain.vectorstores import FAISS
-/workspaces/LLM_Final_Project/docchatapp.py:14: LangChainDeprecationWarning: Importing Chroma from langchain.vectorstores is deprecated. Please replace deprecated imports:
-
->> from langchain.vectorstores import Chroma
-
-with new imports of:
-
->> from langchain_community.vectorstores import Chroma
-You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
-  from langchain.vectorstores import Chroma
-/workspaces/LLM_Final_Project/docchatapp.py:15: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
+/workspaces/LLM_Final_Project/docchatapp.py:10: LangChainDeprecationWarning: Importing FAISS from langchain.vectorstores is deprecated. Please replace deprecated imports:
 
 >> from langchain.vectorstores import FAISS
 
