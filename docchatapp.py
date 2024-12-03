@@ -28,10 +28,10 @@ url = st.text_input("Enter the URL of the menu:")
 
 # Input: Number of diners and budget
 question_1 = st.text_input("How many people are dining? Reply in numbers")
-question_2 = st.text_input("What is the meal budget? Reply in High/Medium/Low")
+question_2 = st.text_input("Additional requests:")
 
 # Process documents and answer questions
-if question_1 and question_2 and url:
+if question_1 and url:
     try:
 
         if url:
@@ -92,8 +92,16 @@ if question_1 and question_2 and url:
         chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
 
         # Construct query
-        query = f"Help order food for {question_1} people under a {question_2} budget."
-        st.write(query)
+        if question_2:
+            hint  = f"Help order food for {question_1} people. Additional requests:{question_2}" 
+            query = f"""Help order food for {question_1} people. Additional requests:{question_2}.
+                    Provide a list food based on the number of people and give a calculation of total cost before tax and tip."""
+        else:
+            hint  = f"Help order food for {question_1} people."
+            query = f"""Help order food for {question_1} people. 
+            Provide a list food based on the number of people and give a calculation of total cost before tax and tip. 
+            Assume no dietary restriction and normal budget requirement."""
+        st.write(hint)
         # Get response
         result = chain.invoke(query)
         response = result['result']
@@ -101,5 +109,5 @@ if question_1 and question_2 and url:
     except Exception as e:
         st.error(f"Error generating response: {e}")
 else:
-    if url and (not question_1 or not question_2):
-        st.info("Please provide both the number of people and the budget.")
+    if url and (not question_1):
+        st.info("Please provide both the number of people.")
