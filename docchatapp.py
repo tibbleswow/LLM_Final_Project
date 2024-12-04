@@ -66,7 +66,7 @@ if question_1 and url:
                     st.error("Loader could not be initialized.")
             except Exception as e:
                 st.error(f"Failed to process the URL: {e}")
-        documents = loader.load()
+                
         # Convert documents to LangChain format
         # documents = [Document(page_content=doc["content"], metadata={}) for doc in documents]
 
