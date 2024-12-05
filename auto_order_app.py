@@ -27,8 +27,10 @@ url = st.text_input("Enter the URL of the menu:")
 
 
 # Input: Number of diners and budget
-question_1 = st.text_input("How many people are dining? Reply in numbers:")
-question_2 = st.text_input("Additional requests(optional):")
+question_1 = st.text_input("How many people are dining? Reply in numbers: ")
+question_2 = st.text_input("Additional requests (Optional): ")
+past_review = st.text_input("Input customer reviews: (Optional. "
+                            "For current version, we are not able to read views from websites. Please copy and paste the reviews directly below)")
 
 # Process documents and answer questions
 if question_1 and url:
@@ -101,8 +103,11 @@ if question_1 and url:
             query = f"""Help order food for {question_1} people. 
             Provide a list food based on the number of people and give a calculation of total cost before tax and tip. 
             Assume no dietary restriction and normal budget requirement."""
-        st.write(hint)
         # Get response
+        if past_review:
+            query += f""" When providing dish recommendations, please refer to the following reviews: {past_review}. """
+            hint  += f""" We are referring to the dining reviews you provided."""
+        st.write(hint)
         result = chain.invoke(query)
         response = result['result']
         st.write(response)
