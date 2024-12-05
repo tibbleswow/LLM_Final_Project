@@ -95,7 +95,7 @@ if question_1 and url:
 
         # Construct query
         if question_2:
-            hint  = f"Help order food for {question_1} people. Additional requests:{question_2}" 
+            hint  = f"Help order food for {question_1} people. Additional requests: {question_2}" 
             query = f"""Help order food for {question_1} people. Additional requests:{question_2}.
                     Provide a list food based on the number of people and give a calculation of total cost before tax and tip."""
         else:
